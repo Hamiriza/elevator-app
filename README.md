@@ -37,6 +37,11 @@ acceleration $a$ = metres per second per second ms⁻²
 - constant speed time = constant speed distance / max speed
 - travel time = acceleration time + constant speed time + deceleration time
 
+displacement $s$ = metres m  
+peak speed $vₚ$ or $u$ = metres per second ms⁻¹  
+acceleration $a$ = metres per second per second ms⁻²
+deceleration $d$ = metres per second per second ms⁻²
+
 ## Setup
 
 This app is built using Typescript, React, Node, Express
@@ -45,7 +50,7 @@ This app is built using Typescript, React, Node, Express
 
 Both frontend and backend need to be run in a separate terminal.
 
-### start the frontend
+### Start the frontend
 
 At the project root directory, enter the command shown below:
 
@@ -55,7 +60,7 @@ npm run start:frontend
 
 The frontend will run on port 4000
 
-### start the backend
+### Start the backend
 
 At the project root directory, enter the command shown below:
 
