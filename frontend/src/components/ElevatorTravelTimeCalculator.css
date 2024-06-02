@@ -58,3 +58,13 @@ button:hover {
   font-size: 18px;
   color: #333;
 }
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.image-wrapper img {
+  height: 100px;
+  width: 100px;
+}

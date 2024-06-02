@@ -103,6 +103,9 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
     <div className="calculator-wrapper">
       <div className="calculator">
         <h1>Elevator Travel Time Calculator</h1>
+        <div className="image-wrapper">
+          <img src="/elevator.png" alt="elevator" />
+        </div>
         <div className="form-group">
           <label htmlFor="numberOfFloors">Number of Floors: </label>
           <input
