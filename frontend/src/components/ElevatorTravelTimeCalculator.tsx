@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Elevator } from "../Elevator";
+import React, { useEffect, useRef, useState } from "react";
 import "./ElevatorTravelTimeCalculator.css";
 
 const ElevatorTravelTimeCalculator: React.FC = () => {
@@ -20,6 +19,8 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
   // =============================================================================
   // EFFECTS
   // =============================================================================
+
+  const resultRef = useRef<HTMLDivElement>(null);
 
   // ensures that if floor1 and floor2 exceed number of floors, they are adjusted to valid values
   useEffect(() => {
@@ -57,15 +58,34 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
     setFloorHeights(newFloorHeights);
   };
 
-  const handleCalculate = () => {
-    const elevator = new Elevator(
-      acceleration,
-      deceleration,
-      maxSpeed,
-      floorHeights
+  const handleCalculate = async () => {
+    const response = await fetch(
+      "http://localhost:4001/api/calculate-travel-time",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          acceleration,
+          deceleration,
+          maxSpeed,
+          floorHeights,
+          startFloor: floor1,
+          endFloor: floor2,
+        }),
+      }
     );
-    const time = elevator.calculateTravelTime(floor1, floor2);
-    setTravelTime(time);
+
+    if (response.ok) {
+      const data = await response.json();
+      setTravelTime(data.travelTime);
+      if (resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      console.error("Failed to calculate travel time");
+    }
   };
 
   // =============================================================================
@@ -148,7 +168,7 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
         </div>
         <button onClick={handleCalculate}>Calculate</button>
         {travelTime !== null && (
-          <div className="result">
+          <div className="result" ref={resultRef}>
             Estimated travel time: {travelTime.toFixed(2)} seconds
           </div>
         )}
