@@ -15,6 +15,7 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
   const [floor1, setFloor1] = useState(0);
   const [floor2, setFloor2] = useState(0);
   const [travelTime, setTravelTime] = useState<number | null>(null);
+  const [peakSpeed, setPeakSpeed] = useState<number | null>(null);
 
   // =============================================================================
   // EFFECTS
@@ -80,6 +81,7 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
     if (response.ok) {
       const data = await response.json();
       setTravelTime(data.travelTime);
+      setPeakSpeed(data.peakSpeed);
       if (resultRef.current) {
         resultRef.current.scrollIntoView({ behavior: "smooth" });
       }
@@ -169,7 +171,8 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
         <button onClick={handleCalculate}>Calculate</button>
         {travelTime !== null && (
           <div className="result" ref={resultRef}>
-            Estimated travel time: {travelTime.toFixed(2)} seconds
+            <p>Estimated travel time: {travelTime.toFixed(2)} seconds</p>
+            <p>Peak speed: {peakSpeed?.toFixed(2)} m/s</p>
           </div>
         )}
       </div>

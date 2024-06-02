@@ -33,9 +33,14 @@ const calculateTravelTime = (req: Request, res: Response) => {
   }
 
   const distance = calculateDistance(floorHeights, startFloor, endFloor);
-  const time = calculateTime(distance, acceleration, deceleration, maxSpeed);
+  const { time, peakSpeed } = calculateTimeAndPeakSpeed(
+    distance,
+    acceleration,
+    deceleration,
+    maxSpeed
+  );
 
-  return res.json({ travelTime: time });
+  return res.json({ travelTime: time, peakSpeed: peakSpeed });
 };
 
 const validateParams = (
@@ -78,7 +83,7 @@ const calculateDistance = (
   return distance;
 };
 
-const calculateTime = (
+const calculateTimeAndPeakSpeed = (
   distance: number,
   acceleration: number,
   deceleration: number,
@@ -95,11 +100,13 @@ const calculateTime = (
       (2 * acceleration * deceleration * distance) /
         (acceleration + deceleration)
     );
-    return (2 * peakSpeed) / (acceleration + deceleration);
+    const time = (2 * peakSpeed) / (acceleration + deceleration);
+    return { time, peakSpeed };
   } else {
     const cruiseDistance = distance - accelDistance - decelDistance;
     const cruiseTime = cruiseDistance / maxSpeed;
-    return accelTime + cruiseTime + decelTime;
+    const time = accelTime + cruiseTime + decelTime;
+    return { time, peakSpeed: maxSpeed };
   }
 };
 
