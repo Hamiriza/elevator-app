@@ -7,7 +7,7 @@ Imagine you work for an elevator company. You are tasked with creating a softwar
 ## Equations of motion reference
 
 1. $` v = u + at `$
-2. $` s = (u + v)t \over 2 `$
+2. $` s = {(u + v) \over 2}t `$
 3. $` v^2 = u^2 + 2as `$
 4. $` s = ut + (1/2)at^2 `$
 5. $` s = vt - (1/2) at^2 `$
