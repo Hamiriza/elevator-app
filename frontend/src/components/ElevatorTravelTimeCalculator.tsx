@@ -40,7 +40,12 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
   const handleTempNumFloorsChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setTempNumFloors(e.target.value);
+    let intValue = e.target.value;
+    if (isNaN(parseInt(intValue)) || parseInt(intValue) > 0) {
+      setTempNumFloors(intValue);
+    } else {
+      setTempNumFloors("1");
+    }
   };
 
   // validates the value when the input loses focus (on blur)
@@ -99,8 +104,9 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
       <div className="calculator">
         <h1>Elevator Travel Time Calculator</h1>
         <div className="form-group">
-          <label>Number of Floors: </label>
+          <label htmlFor="numberOfFloors">Number of Floors: </label>
           <input
+            id="numberOfFloors"
             type="number"
             value={tempNumFloors}
             onChange={handleTempNumFloorsChange}
@@ -110,8 +116,11 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
         </div>
         {floorHeights.map((height, index) => (
           <div key={index} className="form-group">
-            <label>Height of Floor {index} (m): </label>
+            <label htmlFor={`floorHeight${index}`}>
+              Height of Floor {index} (m):{" "}
+            </label>
             <input
+              id={`floorHeight${index}`}
               type="number"
               value={height}
               onChange={(e) =>
@@ -122,8 +131,9 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
           </div>
         ))}
         <div className="form-group">
-          <label>Acceleration (m/s²)</label>
+          <label htmlFor="acceleration">Acceleration (m/s²):</label>
           <input
+            id="acceleration"
             type="number"
             value={acceleration}
             onChange={(e) => setAcceleration(parseFloat(e.target.value))}
@@ -131,8 +141,9 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
           />
         </div>
         <div className="form-group">
-          <label>Deceleration (m/s²)</label>
+          <label htmlFor="deceleration">Deceleration (m/s²):</label>
           <input
+            id="deceleration"
             type="number"
             value={deceleration}
             onChange={(e) => setDeceleration(parseFloat(e.target.value))}
@@ -140,8 +151,9 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
           />
         </div>
         <div className="form-group">
-          <label>Max Speed (m/s):</label>
+          <label htmlFor="maxSpeed">Max Speed (m/s):</label>
           <input
+            id="maxSpeed"
             type="number"
             value={maxSpeed}
             onChange={(e) => setMaxSpeed(parseFloat(e.target.value))}
@@ -149,8 +161,9 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
           />
         </div>
         <div className="form-group">
-          <label>Start Floor: </label>
+          <label htmlFor="startFloor">Start Floor: </label>
           <input
+            id="startFloor"
             type="number"
             value={floor1}
             onChange={(e) => setFloor1(parseInt(e.target.value))}
@@ -159,8 +172,9 @@ const ElevatorTravelTimeCalculator: React.FC = () => {
           ></input>
         </div>
         <div className="form-group">
-          <label>End Floor: </label>
+          <label htmlFor="endFloor">End Floor: </label>
           <input
+            id="endFloor"
             type="number"
             value={floor2}
             onChange={(e) => setFloor2(parseInt(e.target.value))}

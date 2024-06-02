@@ -22,7 +22,8 @@
 
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "include": ["src"]
 }
