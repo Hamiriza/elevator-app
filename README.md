@@ -16,3 +16,51 @@ time $t$ = seconds s
 displacement $s$ = metres m  
 velocity $v$ or $u$ = metres per second ms⁻¹  
 acceleration $a$ = metres per second per second ms⁻²
+
+## Equations and approach to calculate travel time and peak speed
+
+1. acceleration time = $`t₁`$ = $`vₘ \over a`$
+2. acceleration distance = $`s₁`$ = $`{1 \over 2}at₁^2`$
+3. deceleration time = $`t₂`$ = $`vₘ \over d`$
+4. deceleration distance = $`s₂`$ = $`{1 \over 2}dt₂^2`$
+5. if distance <= $`s₁ + s₂ `$
+
+- $`vₚ = at₁`$
+- $`vₚ = dt₂`$
+- $`s = {1 \over 2}at₁^2 + {1 \over 2}dt₂^2 `$
+- peak speed = $`vₚ =\sqrt{{2sad}\over(a+d)} `$
+- travel time = $`{2vₚ}\over(a+d)`$
+
+6. otherwise
+
+- constant speed distance = distance - acceleration time - deceleration time
+- constant speed time = constant speed distance / max speed
+- travel time = acceleration time + constant speed time + deceleration time
+
+## Setup
+
+This app is built using Typescript, React, Node, Express
+
+## Running the application
+
+Both frontend and backend need to be run in a separate terminal.
+
+### start the frontend
+
+At the project root directory, enter the command shown below:
+
+```bash
+npm run start:frontend
+```
+
+The frontend will run on port 4000
+
+### start the backend
+
+At the project root directory, enter the command shown below:
+
+```bash
+npm run start:backend
+```
+
+The backend will run on port 4001
