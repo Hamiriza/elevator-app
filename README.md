@@ -44,7 +44,7 @@ deceleration $d$ = metres per second per second ms⁻²
 
 ## Setup
 
-This app is built using Typescript, React, Node, Express
+This app is built using Typescript, React, Redux, Node, Express  
 There are two ways to run the application:
 
 1. Running the services manually
