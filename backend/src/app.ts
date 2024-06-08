@@ -12,8 +12,13 @@ app.use("/api", elevatorRoutes);
 app.use("/ping", (req, res) => {
   res.json({ response: "pong!!!" });
 });
-app.use("/about", (req, res) => {
-  res.send("About");
+app.use("/info", (req, res) => {
+  res.json({
+    model: "SuperFast 3000",
+    capacity: 15,
+    manufacturer: "Elevator Co.",
+    year: 2023,
+  });
 });
 
 export default app;
