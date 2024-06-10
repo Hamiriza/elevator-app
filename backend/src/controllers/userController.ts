@@ -36,3 +36,18 @@ export const logout = (req: Request, res: Response) => {
     }
   });
 };
+
+export const me = async (req: Request, res: Response) => {
+  const userId = (req.session as any).userId;
+  if (!userId) {
+    return res.sendStatus(401);
+  }
+
+  const userRepository = AppDataSource.getRepository(User);
+  const user = await userRepository.findOne({ where: { id: userId } });
+  if (!user) {
+    return res.sendStatus(404);
+  }
+
+  res.json(user);
+};

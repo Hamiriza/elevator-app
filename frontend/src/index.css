@@ -7,3 +7,16 @@ body {
   padding: 20px;
   text-align: center;
 }
+
+.input-field-1 {
+  margin-bottom: 5px;
+}
+
+.button-in {
+  max-width: 150px;
+  max-height: fit-content;
+}
+
+.button-out {
+  background-color: red;
+}
