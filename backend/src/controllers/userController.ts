@@ -4,13 +4,21 @@ import { User } from "../entity/User";
 
 export const register = async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  const userRepository = AppDataSource.getRepository(User);
-  const user = new User();
-  user.username = username;
-  user.password = password;
-  await user.hashPassword();
-  await userRepository.save(user);
-  res.sendStatus(201);
+  try {
+    const userRepository = AppDataSource.getRepository(User);
+    const existingUser = await userRepository.findOne({ where: { username } });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already exists" });
+    }
+    const user = new User();
+    user.username = username;
+    user.password = password;
+    await user.hashPassword();
+    await userRepository.save(user);
+    res.sendStatus(201);
+  } catch (error) {
+    res.status(500);
+  }
 };
 
 export const login = async (req: Request, res: Response) => {

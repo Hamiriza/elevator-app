@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -8,11 +8,17 @@ const Login: React.FC = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (auth?.user) {
+      navigate("/");
+    }
+  }, [auth?.user, history]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    auth?.clearError();
     try {
       await auth?.login(username, password);
-      navigate("/");
     } catch (error) {
       console.error("Login failed", error);
     }
@@ -41,6 +47,7 @@ const Login: React.FC = () => {
         <button className="button-in" type="submit">
           Login
         </button>
+        {auth?.error && <div className="error-notif">{auth.error}</div>}
       </form>
     </div>
   );

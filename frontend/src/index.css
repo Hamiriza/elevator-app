@@ -20,3 +20,13 @@ body {
 .button-out {
   background-color: red;
 }
+
+.error-notif {
+  color: red;
+  margin-top: 5px;
+}
+
+.success-notif {
+  color: green;
+  margin-top: 5px;
+}

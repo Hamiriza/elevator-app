@@ -10,9 +10,10 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    auth?.clearError();
+    auth?.clearSuccess();
     try {
       await auth?.register(username, password);
-      navigate("/");
     } catch (error) {
       console.error("Registration failed", error);
     }
@@ -41,6 +42,8 @@ const Register: React.FC = () => {
         <button className="button-in" type="submit">
           Register
         </button>
+        {auth?.error && <div className="error-notif">{auth.error}</div>}
+        {auth?.success && <div className="success-notif">{auth.success}</div>}
       </form>
     </div>
   );
